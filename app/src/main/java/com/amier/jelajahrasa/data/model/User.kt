@@ -6,5 +6,5 @@ data class User(
     var email:String,
     var password:String,
     var likedFoodId:List<Int>,
-    var _likedFoodId:String
+    var _likedFoodIdSignature:String
 )
