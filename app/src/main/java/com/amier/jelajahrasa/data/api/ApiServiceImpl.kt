@@ -9,7 +9,7 @@ import okhttp3.ResponseBody
 
 class ApiServiceImpl:ApiService {
     override fun getFoods(): Single<List<Food>> {
-        TODO("Not yet implemented")
+        return NetworkConfig.api().getFoods()
     }
 
     override fun register(name:String, email: String, password: String): Single<HighUser> {
