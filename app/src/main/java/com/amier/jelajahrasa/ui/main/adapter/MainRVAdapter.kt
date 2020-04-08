@@ -38,19 +38,19 @@ class MainRVAdapter(val viewModel: MainViewModel):RecyclerView.Adapter<MainRVAda
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val data = list?.get(position)
+        val food = list?.get(position)
         val actionListener = object :ItemMainClickListener{
             override fun onItemClick() {
-                viewModel.uiItemData.value = data
+                viewModel.uiItemData.value = food
                 viewModel.onClickEvent(0)
             }
 
             override fun onLikesClick() {
-//                viewModel.setLikesOrNot(data?.id)
+                viewModel.setLikesOrNot(food?.id)
             }
         }
-        if (data !=null) {
-            holder.bindRows(data,actionListener)
+        if (food !=null) {
+            holder.bindRows(food,actionListener)
         }
     }
 

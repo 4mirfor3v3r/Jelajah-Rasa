@@ -48,8 +48,6 @@ init {
     }
     fun setLikesOrNot(data: Int?){
         TODO("UPDATE LIKES")
-//        if (data!=null && ){
-//        }
     }
 
     fun onRefresh(){

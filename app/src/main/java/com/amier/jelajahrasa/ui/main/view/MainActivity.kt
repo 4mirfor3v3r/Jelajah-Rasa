@@ -1,5 +1,6 @@
 package com.amier.jelajahrasa.ui.main.view
 
+import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -35,10 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbarMain)
-        title = "Set DAta"
         binding.rvMain.adapter = adapter
         binding.vm = viewModel
         rvMain.layoutManager = GridLayoutManager(this,2)
+
     }
 
     override fun onStart() {
