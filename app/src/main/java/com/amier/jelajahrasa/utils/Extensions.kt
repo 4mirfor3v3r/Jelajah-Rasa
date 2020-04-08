@@ -1,27 +1,29 @@
 package com.amier.jelajahrasa.utils
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.amier.jelajahrasa.data.model.Food
 import com.amier.jelajahrasa.ui.main.adapter.MainRVAdapter
-import com.amier.jelajahrasa.ui.main.viewmodel.MainViewModel
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
 
 object Extensions {
-    @BindingAdapter(value = ["app:mainList","app:vm"], requireAll = false)
-    @JvmStatic
-    fun setmainList(recyclerView: RecyclerView, repoData: List<Food>?, vm: MainViewModel){
-        if (repoData != null){
-            recyclerView.adapter =MainRVAdapter()
-            with(recyclerView.adapter as MainRVAdapter){
-                viewModel = vm
-                replaceData(repoData)
-            }
-        }
-    }
+//    @BindingAdapter("app:mainList")
+//    @JvmStatic
+//    fun setmainList(recyclerView: GridRecyclerView, repoData: List<Food>?
+////                    , vm: MainViewModel
+//    ){
+//        if (repoData != null){
+//            recyclerView.adapter =MainRVAdapter()
+//            with(recyclerView.adapter as MainRVAdapter){
+//                Log.e("LISTED",repoData.toString())
+//                replaceData(repoData)
+//            }
+//        }
+//        Log.e("LISTEDNUL",repoData.toString())
+//    }
 
     private val picasso: Picasso
         get() = Picasso.get()
@@ -31,6 +33,7 @@ object Extensions {
     }
 
     @BindingAdapter("app:imageUrl")
+    @JvmStatic
     fun loadImage(view: ImageView,url:String?){
         if (url!=null){
             view.load(url){requestCreator ->

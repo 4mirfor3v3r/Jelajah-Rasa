@@ -1,14 +1,11 @@
 package com.amier.jelajahrasa.data.api
 
-import com.amier.jelajahrasa.data.model.Food
+import com.amier.jelajahrasa.data.model.HighItemMain
 import com.amier.jelajahrasa.data.model.HighUser
-import com.amier.jelajahrasa.data.model.User
 import io.reactivex.Single
-import okhttp3.Response
-import okhttp3.ResponseBody
 
 class ApiServiceImpl:ApiService {
-    override fun getFoods(): Single<List<Food>> {
+    override fun getFoods(): Single<HighItemMain> {
         return NetworkConfig.api().getFoods()
     }
 

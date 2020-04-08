@@ -1,12 +1,14 @@
 package com.amier.jelajahrasa.data.model
 
+
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Fact(
-    var calori:Double,
-    var carbohidrat:Double,
-    var protein:Double,
-    var vitamin:Double
+    @SerializedName("calori")       val calori: Int,
+    @SerializedName("carbohidrat")  val carbohidrat: Int,
+    @SerializedName("protein")      val protein: Int,
+    @SerializedName("vitamin")      val vitamin: Int
 ):Parcelable

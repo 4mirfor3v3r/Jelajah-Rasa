@@ -1,11 +1,11 @@
 package com.amier.jelajahrasa.data.repository
 
 import com.amier.jelajahrasa.data.api.ApiHelper
-import com.amier.jelajahrasa.data.model.Food
+import com.amier.jelajahrasa.data.model.HighItemMain
 import io.reactivex.Single
 
 class MainRepo (private val apiHelper: ApiHelper){
-    fun getFoods():Single<List<Food>>{
+    fun getFoods():Single<HighItemMain>{
         return apiHelper.getFoods()
     }
 }

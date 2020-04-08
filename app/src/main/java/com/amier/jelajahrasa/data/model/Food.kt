@@ -1,16 +1,20 @@
 package com.amier.jelajahrasa.data.model
 
+
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Food(
-    var id:Int,
-    var name:String,
-    var imgUrl:String,
-    var time:String,
-    var likes:Int,
-    var ingredients:List<Ingredient>,
-    var fact:Fact,
-    var steps:List<Step>
+    @SerializedName("fact")         val fact: Fact,
+    @SerializedName("id")           val id: Int,
+    @SerializedName("_id")          val _id: String,
+    @SerializedName("imgUrl")       val imgUrl: String,
+    @SerializedName("ingredients")  val ingredients: List<String>,
+    @SerializedName("likes")        val likes: Int,
+    @SerializedName("name")         val name: String,
+    @SerializedName("steps")        val steps: List<String>,
+    @SerializedName("time")         val time: Int,
+    @SerializedName("__v")          val v: Int
 ):Parcelable
