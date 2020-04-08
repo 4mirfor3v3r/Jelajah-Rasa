@@ -5,7 +5,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.amier.jelajahrasa.App
 import com.amier.jelajahrasa.data.model.HighItemMain
+import com.amier.jelajahrasa.data.model.HighLikesMain
 import com.amier.jelajahrasa.data.repository.MainRepo
 import com.amier.jelajahrasa.utils.Resource
 import com.amier.jelajahrasa.utils.SingleLiveData
@@ -15,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
 
 class MainViewModel (private val mainRepo: MainRepo):ViewModel(){
     private val list = MutableLiveData<Resource<HighItemMain>>()
+    private val liked = MutableLiveData<Resource<HighLikesMain>>()
     private val compositeDisposable = CompositeDisposable()
 
     val isNested = false
@@ -47,7 +50,19 @@ init {
         uiEventData.setValue(value)
     }
     fun setLikesOrNot(data: Int?){
-        TODO("UPDATE LIKES")
+        val userId =App.prefHelper?.getString("userId") ?: ""
+        if (userId != ""){
+            compositeDisposable.add(
+                mainRepo.addLikes(userId,data)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        liked.postValue(Resource.success(it))
+                    },{
+                        liked.value = Resource.error("Something wen't Wrong : ${it.message}",null)
+                    })
+            )
+        }
     }
 
     fun onRefresh(){

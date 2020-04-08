@@ -2,11 +2,9 @@ package com.amier.jelajahrasa.data.api
 
 import com.amier.jelajahrasa.data.model.HighUser
 import com.amier.jelajahrasa.data.model.HighItemMain
+import com.amier.jelajahrasa.data.model.HighLikesMain
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiService {
 //    foods
@@ -22,4 +20,14 @@ interface ApiService {
     @POST("users/login")
     fun login(@Field("email") email:String,
               @Field("password") password:String):Single<HighUser>
+
+    @FormUrlEncoded
+    @PUT("listAddLikes/{userID}")
+    fun addLikes(@Path("userID") userID:String?,
+                 @Field("id") foodID:Int? ):Single<HighLikesMain>
+
+    @FormUrlEncoded
+    @PUT("listRemoveLikes/{userID}")
+    fun removeLikes(@Path("userID") userID:String?,
+                    @Field("id") foodID:Int?):Single<HighLikesMain>
 }
