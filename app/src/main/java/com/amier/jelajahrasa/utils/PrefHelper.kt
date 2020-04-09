@@ -14,4 +14,26 @@ class PrefHelper(context: Context) {
     fun getString(key: String): String{
         return prefHelper.getString(key, "")!!
     }
+    fun setArray(key:String, array:ArrayList<Int>){
+        prefHelper.edit().putString(key, array.toString()).apply()
+    }
+    fun getArray(key: String):ArrayList<Int> {
+        val str = prefHelper.getString(key,"")
+        return if (str != null) {
+            arrayStringToIntegerArrayList(str)
+        }else{
+            arrayListOf()
+        }
+    }
+
+    private fun arrayStringToIntegerArrayList(stringArray: String): ArrayList<Int> {
+        val removedBrackets = stringArray.substring(1, stringArray.length - 1)
+        val individualNumbers = removedBrackets.split(",").toTypedArray()
+        val integerArrayList: ArrayList<Int> = ArrayList()
+        for (numberString in individualNumbers) {
+            integerArrayList.add(numberString.trim { it <= ' ' }.toInt())
+        }
+        return integerArrayList
+    }
+
 }

@@ -6,10 +6,12 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.amier.jelajahrasa.App
 import com.amier.jelajahrasa.data.model.HighUser
 import com.amier.jelajahrasa.data.model.User
 import com.amier.jelajahrasa.data.repository.LoginRegisterRepo
 import com.amier.jelajahrasa.ui.main.view.RegisterActivity
+import com.amier.jelajahrasa.utils.Constants
 import com.amier.jelajahrasa.utils.Resource
 import com.amier.jelajahrasa.utils.SingleLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -43,6 +45,11 @@ class LoginViewModel(private val loginRegisterRepo: LoginRegisterRepo):ViewModel
             verify(email!!, password!!)
         }
     }
+    fun saveToPreferences(dat: User){
+        App.prefHelper?.setString(Constants.USER_ID,dat._id)
+        App.prefHelper?.setArray(Constants.LIKED_FOODS_ARRAY,dat.likedFoodId)
+    }
+
 //    SINGLE LIVE EVENT
     fun onClickEvent(value:Int){
         uiEventData.setValue(value)

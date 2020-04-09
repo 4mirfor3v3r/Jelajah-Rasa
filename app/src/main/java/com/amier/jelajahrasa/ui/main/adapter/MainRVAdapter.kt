@@ -13,6 +13,7 @@ import com.amier.jelajahrasa.ui.main.viewmodel.MainViewModel
 class MainRVAdapter(val viewModel: MainViewModel):RecyclerView.Adapter<MainRVAdapter.Holder>() {
 
     private var list:ArrayList<Food>? = arrayListOf()
+    private var likedId:ArrayList<Int>? = arrayListOf()
 
     class Holder(itemMainBinding:ItemMainBinding):RecyclerView.ViewHolder(itemMainBinding.root) {
         private val binding = itemMainBinding
@@ -46,7 +47,12 @@ class MainRVAdapter(val viewModel: MainViewModel):RecyclerView.Adapter<MainRVAda
             }
 
             override fun onLikesClick() {
-                viewModel.setLikesOrNot(food?.id)
+                if (food != null) {
+                    if (likedId?.contains(food.id)!!)
+                        viewModel.removeFromLikes(food.id)
+                    else
+                        viewModel.addToLikes(food.id)
+                }
             }
         }
         if (food !=null) {
