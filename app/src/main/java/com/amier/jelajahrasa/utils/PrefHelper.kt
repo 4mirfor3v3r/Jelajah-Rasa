@@ -2,6 +2,7 @@ package com.amier.jelajahrasa.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import java.lang.NullPointerException
 
 class PrefHelper(context: Context) {
 
@@ -11,18 +12,26 @@ class PrefHelper(context: Context) {
         prefHelper.edit().putString(key, value).apply()
     }
 
-    fun getString(key: String): String{
-        return prefHelper.getString(key, "")!!
+    fun getString(key: String): String?{
+        return try {
+            prefHelper.getString(key, "")!!
+        }catch (e:NullPointerException){
+            null
+        }
     }
     fun setArray(key:String, array:ArrayList<Int>){
         prefHelper.edit().putString(key, array.toString()).apply()
     }
-    fun getArray(key: String):ArrayList<Int> {
-        val str = prefHelper.getString(key,"")
-        return if (str != null) {
-            arrayStringToIntegerArrayList(str)
-        }else{
-            arrayListOf()
+    fun getArray(key: String):ArrayList<Int>? {
+        return try {
+            val str = prefHelper.getString(key, "")
+            if (str != null) {
+                arrayStringToIntegerArrayList(str)
+            } else {
+                arrayListOf()
+            }
+        }catch (e:NullPointerException) {
+            null
         }
     }
 

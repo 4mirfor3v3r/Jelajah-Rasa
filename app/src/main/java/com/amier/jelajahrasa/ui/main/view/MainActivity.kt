@@ -26,20 +26,23 @@ import com.amier.jelajahrasa.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var adapter:MainRVAdapter
+    private lateinit var adapter: MainRVAdapter
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this,ViewModelFactory(ApiHelper(ApiServiceImpl()))).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(ApiHelper(ApiServiceImpl()))
+        ).get(MainViewModel::class.java)
         adapter = MainRVAdapter(viewModel)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(toolbarMain)
         binding.rvMain.adapter = adapter
         binding.vm = viewModel
-        rvMain.layoutManager = GridLayoutManager(this,2)
+        rvMain.layoutManager = GridLayoutManager(this, 2)
 
     }
 
@@ -47,38 +50,39 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         listen()
     }
-    private fun listen(){
-        viewModel.getList().observe(this, Observer {
-            when(it.status){
-                Status.SUCCESS->{
-                    binding.overlay.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
-                    binding.appbar.visibility = View.VISIBLE
 
-                    binding.mainSwipe.isRefreshing = false
+    private fun listen() {
+        viewModel.getList().observe(this, Observer {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    view(false, 8)
+                    binding.appbar.visibility = View.VISIBLE
 
                     adapter.replaceData(it.data!!.foods)
                     binding.rvMain.startLayoutAnimation()
                 }
-                Status.ERROR->{
-                    binding.overlay.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(this,it.message,Toast.LENGTH_LONG).show()
-                    binding.mainSwipe.isRefreshing = false
+                Status.ERROR -> {
+                    view(false, 8)
+                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
                 }
-                Status.LOADING->{
-                    binding.overlay.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.mainSwipe.isRefreshing = false
+                Status.LOADING -> {
+                    view(false, 0)
                 }
             }
         })
         viewModel.uiEventData.observe(this, Observer {
-            when(it){
-                0-> startActivity(
-                    Intent(this,DetailActivity::class.java)
-                        .putExtra("data",viewModel.uiItemData.value))
+            when (it) {
+                0 -> startActivity(
+                    Intent(this, DetailActivity::class.java)
+                        .putExtra("data", viewModel.uiItemData.value)
+                )
             }
         })
+    }
+
+    fun view(enable: Boolean, visibility: Int) {
+        binding.mainSwipe.isRefreshing = enable
+        binding.overlay.visibility = visibility
+        binding.progressBar.visibility = visibility
     }
 }
