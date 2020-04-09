@@ -1,5 +1,6 @@
 package com.amier.jelajahrasa.ui.main.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -32,29 +33,30 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.getUser().observe(this, Observer {
             when(it.status){
                 Status.SUCCESS ->{
-                    binding.layoutRegister.isEnabled = true
-                    binding.overlay.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
+                    view(true,8)
                     if (it.data != null){
                         if (it.data.status == "error"){
                             Toast.makeText(this, "Error :${it.data.msg}", Toast.LENGTH_SHORT).show()
                         }else if (it.data.status == "ok"){
                             val dat = it.data.user
                             if (dat != null) {
-                                Toast.makeText(this, "Login Success :\\nData: [${dat.name} ${dat.email} ${dat.password}]", Toast.LENGTH_LONG).show()
+                                viewModel.saveToPreferences(dat)
+                                Toast.makeText(this, "Login Success.", Toast.LENGTH_LONG).show()
+                                startActivity(
+                                    Intent(
+                                        this,
+                                        MainActivity::class.java
+                                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                )
                             }
                         }
                     }
                 }
                 Status.ERROR ->{
-                    binding.layoutRegister.isEnabled = true
-                    binding.overlay.visibility = View.GONE
-                    binding.progressBar.visibility = View.GONE
+                    view(true,8)
                 }
                 Status.LOADING ->{
-                    binding.layoutRegister.isEnabled = false
-                    binding.overlay.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.VISIBLE
+                    view(false,0)
                 }
             }
         })
@@ -66,6 +68,11 @@ class RegisterActivity : AppCompatActivity() {
                     binding.etRegisterPassword.text.toString())
             }
         })
+    }
+    fun view(enable: Boolean, visibility: Int) {
+        binding.layoutRegister.isEnabled = enable
+        binding.overlay.visibility = visibility
+        binding.progressBar.visibility = visibility
     }
 
     override fun onBackPressed() {

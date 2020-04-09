@@ -2,8 +2,11 @@ package com.amier.jelajahrasa.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.amier.jelajahrasa.App
 import com.amier.jelajahrasa.data.model.HighUser
+import com.amier.jelajahrasa.data.model.User
 import com.amier.jelajahrasa.data.repository.LoginRegisterRepo
+import com.amier.jelajahrasa.utils.Constants
 import com.amier.jelajahrasa.utils.Resource
 import com.amier.jelajahrasa.utils.SingleLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -43,5 +46,10 @@ class RegisterViewModel(private val loginRegisterRepo: LoginRegisterRepo):ViewMo
     }
     fun getUser():MutableLiveData<Resource<HighUser>>{
         return user
+    }
+
+    fun saveToPreferences(dat: User) {
+        App.prefHelper?.setString(Constants.USER_ID,dat._id)
+        App.prefHelper?.setArray(Constants.LIKED_FOODS_ARRAY,dat.likedFoodId)
     }
 }

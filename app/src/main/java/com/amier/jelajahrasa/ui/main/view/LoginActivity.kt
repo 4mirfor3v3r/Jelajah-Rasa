@@ -42,11 +42,12 @@ class LoginActivity : AppCompatActivity() {
                     view(true, 8)
                     if (it.data != null) {
                         if (it.data.status == "error") {
-                            Toast.makeText(this, "Error :${it.data.msg}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Ups :${it.data.msg}", Toast.LENGTH_SHORT).show()
                         } else if (it.data.status == "ok") {
                             val dat = it.data.user
                             if (dat != null) {
                                 viewModel.saveToPreferences(dat)
+                                Toast.makeText(this, "Login Success.", Toast.LENGTH_LONG).show()
                                 startActivity(
                                     Intent(
                                         this,
