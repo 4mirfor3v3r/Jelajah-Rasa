@@ -47,7 +47,12 @@ class LoginActivity : AppCompatActivity() {
                             val dat = it.data.user
                             if (dat != null) {
                                 viewModel.saveToPreferences(dat)
-                                startActivity(Intent(this, MainActivity::class.java))
+                                startActivity(
+                                    Intent(
+                                        this,
+                                        MainActivity::class.java
+                                    ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK))
+                                )
                             }
                         }
                     }
