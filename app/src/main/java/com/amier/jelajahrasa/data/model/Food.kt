@@ -12,7 +12,7 @@ data class Food(
     @SerializedName("_id")          val _id: String,
     @SerializedName("imgUrl")       val imgUrl: String,
     @SerializedName("ingredients")  val ingredients: List<String>,
-    @SerializedName("likes")        val likes: Int,
+    @SerializedName("likes")        var likes: Int,
     @SerializedName("name")         val name: String,
     @SerializedName("steps")        val steps: List<String>,
     @SerializedName("time")         val time: Int,

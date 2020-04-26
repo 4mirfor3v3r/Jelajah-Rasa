@@ -22,12 +22,12 @@ interface ApiService {
               @Field("password") password:String):Single<HighUser>
 
     @FormUrlEncoded
-    @PUT("listAddLikes/{userID}")
+    @PUT("foods/listAddLikes/{userID}")
     fun addLikes(@Path("userID") userID:String?,
                  @Field("id") foodID:Int? ):Single<HighLikesMain>
 
     @FormUrlEncoded
-    @PUT("listRemoveLikes/{userID}")
+    @PUT("foods/listRemoveLikes/{userID}")
     fun removeLikes(@Path("userID") userID:String?,
                     @Field("id") foodID:Int?):Single<HighLikesMain>
 }

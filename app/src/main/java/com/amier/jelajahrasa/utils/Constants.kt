@@ -6,4 +6,5 @@ object Constants {
 
     const val USER_ID = "userId"
     const val LIKED_FOODS_ARRAY = "likedArray"
+    const val DETAILACTIVITY_EXTRA = "detailExtra"
 }

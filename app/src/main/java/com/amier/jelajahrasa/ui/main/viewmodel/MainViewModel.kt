@@ -8,6 +8,7 @@ import com.amier.jelajahrasa.App
 import com.amier.jelajahrasa.data.model.HighItemMain
 import com.amier.jelajahrasa.data.model.HighLikesMain
 import com.amier.jelajahrasa.data.repository.MainRepo
+import com.amier.jelajahrasa.utils.Constants
 import com.amier.jelajahrasa.utils.Resource
 import com.amier.jelajahrasa.utils.SingleLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,21 +18,25 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel (private val mainRepo: MainRepo):ViewModel(){
     private val list = MutableLiveData<Resource<HighItemMain>>()
     private val likedId = MutableLiveData<Resource<HighLikesMain>>()
-    val likedArray = MutableLiveData<ArrayList<Int>>()
     private val compositeDisposable = CompositeDisposable()
 
+    val likedArray = MutableLiveData<ArrayList<Int>>()
     val uiEventData = SingleLiveData<Int>()
     var uiItemData = MutableLiveData<Parcelable>()
 
 
 init {
+    getLikedArray()
+    Log.e("VIEWMODEL LIKEDARRAY",likedArray.value.toString())
     getFoods()
 }
 
     private fun getLikedArray(){
-//        App.prefHelper.getArray("")
+        val data = App.prefHelper?.getArray(Constants.LIKED_FOODS_ARRAY)?: arrayListOf()
+        likedArray.value = data
+//        likedArray.postValue(App.prefHelper?.getArray(Constants.LIKED_FOODS_ARRAY)?: arrayListOf())
     }
-
+//    done
     private fun getFoods(){
         list.postValue(Resource.loading(null))
         compositeDisposable.add(
@@ -45,12 +50,13 @@ init {
                 })
         )
     }
-
+//    done
     fun onClickEvent(value:Int){
         uiEventData.setValue(value)
     }
+//    error
     fun addToLikes(data: Int?){
-        val userId =App.prefHelper?.getString("userId") ?: ""
+        val userId =App.prefHelper?.getString(Constants.USER_ID) ?: ""
         if (userId != ""){
             compositeDisposable.add(
                 mainRepo.addLikes(userId,data)
@@ -58,6 +64,7 @@ init {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         likedId.postValue(Resource.success(it))
+                        likedArray.value?.add(it.food.id)
                     },{
                         likedId.value = Resource.error("Something wen't Wrong : ${it.message}",null)
                     })
@@ -73,6 +80,7 @@ init {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
                         likedId.postValue(Resource.success(it))
+                        likedArray.value?.remove(it.food.id)
                     },{
                         likedId.value = Resource.error("Something wen't Wrong : ${it.message}",null)
                     })
@@ -88,7 +96,11 @@ init {
         super.onCleared()
         compositeDisposable.dispose()
     }
+
     fun getList():MutableLiveData<Resource<HighItemMain>>{
         return list
+    }
+    fun getLikedId():MutableLiveData<Resource<HighLikesMain>>{
+        return likedId
     }
 }

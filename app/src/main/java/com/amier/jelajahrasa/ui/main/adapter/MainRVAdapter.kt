@@ -9,11 +9,11 @@ import com.amier.jelajahrasa.data.model.Food
 import com.amier.jelajahrasa.databinding.ItemMainBinding
 import com.amier.jelajahrasa.ui.listener.ItemMainClickListener
 import com.amier.jelajahrasa.ui.main.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.item_main.view.*
 
-class MainRVAdapter(val viewModel: MainViewModel):RecyclerView.Adapter<MainRVAdapter.Holder>() {
+class MainRVAdapter(val viewModel: MainViewModel,var likedId:ArrayList<Int>?):RecyclerView.Adapter<MainRVAdapter.Holder>() {
 
     private var list:ArrayList<Food>? = arrayListOf()
-    private var likedId:ArrayList<Int>? = arrayListOf()
 
     class Holder(itemMainBinding:ItemMainBinding):RecyclerView.ViewHolder(itemMainBinding.root) {
         private val binding = itemMainBinding
@@ -48,14 +48,28 @@ class MainRVAdapter(val viewModel: MainViewModel):RecyclerView.Adapter<MainRVAda
 
             override fun onLikesClick() {
                 if (food != null) {
-                    if (likedId?.contains(food.id)!!)
+                    if (likedId?.contains(food.id)!!) {
+                        holder.itemView.ivMainFavourite.setImageResource(R.drawable.ic_likes_outline)
+                        food.likes--
                         viewModel.removeFromLikes(food.id)
-                    else
+//                        notifyItemChanged(position)
+                    }
+                    else {
+                        holder.itemView.ivMainFavourite.setImageResource(R.drawable.ic_likes_filled)
+                        food.likes++
                         viewModel.addToLikes(food.id)
+//                        notifyItemChanged(position)
+                    }
                 }
             }
         }
         if (food !=null) {
+            if (likedId?.contains(food.id)!!){
+                holder.itemView.ivMainFavourite.setImageResource(R.drawable.ic_likes_filled)
+            }else{
+                holder.itemView.ivMainFavourite.setImageResource(R.drawable.ic_likes_outline)
+            }
+
             holder.bindRows(food,actionListener)
         }
     }

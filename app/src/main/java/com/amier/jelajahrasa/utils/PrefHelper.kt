@@ -2,6 +2,7 @@ package com.amier.jelajahrasa.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import java.lang.NullPointerException
 
 class PrefHelper(context: Context) {
@@ -25,7 +26,8 @@ class PrefHelper(context: Context) {
     fun getArray(key: String):ArrayList<Int>? {
         return try {
             val str = prefHelper.getString(key, "")
-            if (str != null) {
+            if (str != null && str != "" && str != "[]") {
+                Log.e("STR",str)
                 arrayStringToIntegerArrayList(str)
             } else {
                 arrayListOf()
