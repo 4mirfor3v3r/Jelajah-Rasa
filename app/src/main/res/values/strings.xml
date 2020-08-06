@@ -1,3 +1,19 @@
 <resources>
-    <string name="app_name">Jelajah Rasa</string>
+<!--    <string name="app_name">Jelajah Rasa</string>-->
+    <string name="auth_login_tv_title">UI Login</string>
+    <string name="auth_login_btn_register">Register</string>
+    <string name="auth_login_tv_login">LOGIN</string>
+    <string name="auth_login_email_hint">Email</string>
+    <string name="auth_login_password_hint">Password</string>
+    <string name="auth_login_btn_submit">Login</string>
+    <string name="all_email_empty">Email should not Empty</string>
+    <string name="all_email_format_wrong">Email format is wrong</string>
+    <string name="all_pasword_empty">Password should not empty</string>
+    <string name="all_password_min">Minimal 5 character</string>
+    <string name="all_password_combination">Require combination number and text</string>
+    <string name="auth_regist_btn_login">Login</string>
+    <string name="auth_regist_tv_title">UI Register</string>
+    <string name="auth_regist_tv_register">REGISTER</string>
+    <string name="auth_login_name_hint">Name</string>
+    <string name="all_name_empty">Username should not Empty</string>
 </resources>

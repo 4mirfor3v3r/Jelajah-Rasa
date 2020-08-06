@@ -1,2 +1,4 @@
 rootProject.name='Jelajah Rasa'
 include ':app'
+//include ':jelajah-rasa-data'
+//include ':jelajah-rasa-domain'

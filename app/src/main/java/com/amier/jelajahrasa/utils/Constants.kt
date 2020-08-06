@@ -7,4 +7,7 @@ object Constants {
     const val USER_ID = "userId"
     const val LIKED_FOODS_ARRAY = "likedArray"
     const val DETAILACTIVITY_EXTRA = "detailExtra"
+
+    const val TAG_DEBUG = "result_debug"
+    const val TAG_ERROR = "result_error"
 }

@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
         <variable
             name="action"
-            type="com.amier.jelajahrasa.ui.listener.ItemMainClickListener" />
+            type="com.amier.jelajahrasa.presentation.listener.ItemMainClickListener" />
         <variable
             name="data"
             type="com.amier.jelajahrasa.data.model.Food" />

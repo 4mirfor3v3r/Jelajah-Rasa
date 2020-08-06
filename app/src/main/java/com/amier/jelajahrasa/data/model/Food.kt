@@ -1,6 +1,5 @@
 package com.amier.jelajahrasa.data.model
 
-
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -17,4 +16,4 @@ data class Food(
     @SerializedName("steps")        val steps: List<String>,
     @SerializedName("time")         val time: Int,
     @SerializedName("__v")          val v: Int
-):Parcelable
+): Parcelable

@@ -1,11 +1,7 @@
 package com.amier.jelajahrasa.utils
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.amier.jelajahrasa.data.model.Food
-import com.amier.jelajahrasa.ui.main.adapter.MainRVAdapter
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.RequestCreator
 

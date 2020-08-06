@@ -9,13 +9,13 @@
 
         <variable
             name="vm"
-            type="com.amier.jelajahrasa.ui.main.viewmodel.MainViewModel" />
+            type="com.amier.jelajahrasa.presentation.main.viewmodel.MainViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.view.MainActivity">
+        tools:context=".presentation.main.view.MainActivity">
 
 
         <View
