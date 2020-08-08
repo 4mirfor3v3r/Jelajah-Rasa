@@ -2,6 +2,7 @@ package com.amier.jelajahrasa.datas.source.remote
 
 import com.amier.jelajahrasa.datas.model.BaseResponse
 import com.amier.jelajahrasa.datas.model.Food
+import com.amier.jelajahrasa.datas.model.PagedFoods
 import com.amier.jelajahrasa.datas.model.User
 import retrofit2.Response
 import retrofit2.http.*
@@ -12,7 +13,7 @@ interface ApiService {
     suspend fun getFoods(
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
-    ): Response<BaseResponse<List<Food>>>
+    ): Response<BaseResponse<PagedFoods>>
 
     //    users
     @FormUrlEncoded

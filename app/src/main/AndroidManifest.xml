@@ -3,6 +3,7 @@
     package="com.amier.jelajahrasa">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name=".App"
@@ -12,22 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="io.sentry.dsn" android:value="https://fa53051a7d6249458f294119738e0b9c@o422126.ingest.sentry.io/5376677" />
-
-        <activity android:name=".presentation.main.view.DetailActivity">
-
-        </activity>
-        <activity android:name=".presentation.main.view.MainActivity">
-
-        </activity>
-        <activity android:name=".presentation.ui.auth.view.RegisterActivity" />
-        <activity android:name=".presentation.ui.auth.view.LoginActivity">
+        <activity android:name=".presentation.ui.auth.view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="io.sentry.dsn"
+            android:value="https://fa53051a7d6249458f294119738e0b9c@o422126.ingest.sentry.io/5376677" />
+
+        <activity android:name=".presentation.ui.detail.view.DetailActivity"></activity>
+        <activity android:name=".presentation.ui.main.view.MainActivity"></activity>
+        <activity android:name=".presentation.ui.auth.view.RegisterActivity"></activity>
+        <activity android:name=".presentation.ui.auth.view.LoginActivity">
+
         </activity>
     </application>
 

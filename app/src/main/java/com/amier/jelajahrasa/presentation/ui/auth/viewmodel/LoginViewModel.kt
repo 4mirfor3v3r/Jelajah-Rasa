@@ -7,12 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.amier.jelajahrasa.datas.model.User
 import com.amier.jelajahrasa.domain.usecase.AuthUseCase
-import com.amier.jelajahrasa.external.validateEmail
-import com.amier.jelajahrasa.external.validatePassword
-import com.amier.jelajahrasa.utils.SingleLiveData
-import com.amier.jelajahrasa.utils.Status
+import com.amier.jelajahrasa.external.extensions.validateEmail
+import com.amier.jelajahrasa.external.extensions.validatePassword
+import com.amier.jelajahrasa.external.events.SingleLiveData
+import com.amier.jelajahrasa.external.events.Status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

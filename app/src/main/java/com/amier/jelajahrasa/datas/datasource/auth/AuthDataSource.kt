@@ -1,11 +1,8 @@
 package com.amier.jelajahrasa.datas.datasource.auth
 
 import com.amier.jelajahrasa.datas.model.BaseResponse
-import com.amier.jelajahrasa.datas.model.Food
 import com.amier.jelajahrasa.datas.model.User
-import com.amier.jelajahrasa.datas.source.local.entity.LocalFood
-import com.amier.jelajahrasa.utils.Resource
-import retrofit2.Response
+import com.amier.jelajahrasa.external.events.Resource
 
 interface AuthDataSource {
     interface Remote {

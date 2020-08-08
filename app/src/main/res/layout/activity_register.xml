@@ -58,6 +58,7 @@
             android:background="@drawable/btn_top"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:enabled="@{!vm.isLoading}"
             android:text="@string/auth_regist_btn_login"
             android:onClick="@{()-> vm.onClickEvent(0)}"
             android:textColor="@android:color/white"
@@ -104,7 +105,7 @@
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
                 android:paddingBottom="12dp"
-                app:errorText="@{vm.errorEmail}">
+                app:errorText="@{vm.errorName}">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -114,7 +115,7 @@
                     android:enabled="@{!vm.isLoading}"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
-                    android:text="@={vm.email}" />
+                    android:text="@={vm.name}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -180,14 +181,15 @@
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:background="@drawable/login_btn_bg_selector"
-        android:text="Register"
+        android:enabled="@{vm.isValid &amp;&amp; !vm.isLoading}"
+        android:text="@string/auth_register_btn_submit"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:onClick="@{()-> vm.onClickEvent(1)}"/>
+        android:onClick="@{()-> vm.register()}"/>
     </RelativeLayout>
     <ProgressBar
-        android:visibility="gone"
+        android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
         android:id="@+id/progressBar"
         android:elevation="3dp"
         style="@android:style/Widget.Material.Light.ProgressBar.Large"
@@ -196,14 +198,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone"/>
     <View
-        android:visibility="gone"
+        android:visibility="@{vm.isLoading ? View.VISIBLE : View.GONE}"
         android:id="@+id/overlay"
         android:elevation="2dp"
         android:background="#99000000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

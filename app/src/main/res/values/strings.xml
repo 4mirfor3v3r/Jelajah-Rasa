@@ -1,5 +1,5 @@
 <resources>
-<!--    <string name="app_name">Jelajah Rasa</string>-->
+    <!--    <string name="app_name">Jelajah Rasa</string>-->
     <string name="auth_login_tv_title">UI Login</string>
     <string name="auth_login_btn_register">Register</string>
     <string name="auth_login_tv_login">LOGIN</string>
@@ -16,4 +16,10 @@
     <string name="auth_regist_tv_register">REGISTER</string>
     <string name="auth_login_name_hint">Name</string>
     <string name="all_name_empty">Username should not Empty</string>
+    <string name="all_name_min">Minimal 3 Character</string>
+    <string name="auth_register_btn_submit">Register</string>
+    <string name="all_no_internet">Tidak Ada Koneksi Internet</string>
+    <string name="main_title">Jelajah Rasa</string>
+    <string name="menu_item_main_search">Search</string>
+    <string name="menu_item_main_account">Profile</string>
 </resources>

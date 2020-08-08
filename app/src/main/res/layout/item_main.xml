@@ -1,85 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="action"
-            type="com.amier.jelajahrasa.presentation.listener.ItemMainClickListener" />
+            type="com.amier.jelajahrasa.presentation.ui.main.adapter.MainRvFoodsAction" />
+
         <variable
             name="data"
-            type="com.amier.jelajahrasa.data.model.Food" />
+            type="com.amier.jelajahrasa.datas.model.Food" />
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         style="@style/CardView.Light"
-        android:onClick="@{()->action.onItemClick()}"
-        android:layout_margin="6dp"
-        app:cardElevation="5dp"
-        app:cardCornerRadius="16dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_6sdp"
+        android:onClick="@{()->action.onItemClick(data)}"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="5dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tvMainRvListCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:text="@{Integer.toString(data.likes)}"
-                android:textColor="@color/design_default_color_primary_variant"
-                app:layout_constraintBottom_toBottomOf="@+id/ivMainFavourite"
-                app:layout_constraintEnd_toStartOf="@+id/ivMainFavourite"
-                app:layout_constraintTop_toTopOf="@+id/ivMainFavourite" />
-
-            <ImageView
-                android:id="@+id/ivMainFavourite"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:onClick="@{()->action.onLikesClick()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_likes_outline" />
-
-            <TextView
-                android:id="@+id/tvMainRvListName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@{data.name}"
-                android:maxLength="32"
-                android:textColor="@color/design_default_color_primary"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardCornerRadius="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/ivMainRvList"
+                <com.amier.jelajahrasa.external.widget.CustomSquareImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="centerCrop"
+                    android:scaleType="center"
                     app:imageUrl="@{data.imgUrl}"
-                    app:srcCompat="@drawable/ic_launcher_background" />
+                    tools:src="@tools:sample/backgrounds/scenic" />
             </androidx.cardview.widget.CardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:maxLength="32"
+                android:text="@{data.name}"
+                android:textColor="@color/design_default_color_primary"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:text="@{Integer.toString(data.likes)}"
+                    android:textColor="@color/design_default_color_primary_variant"
+                    tools:text="@tools:sample/us_zipcodes" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:onClick="@{(v)->action.onLikesClick(v,data)}"
+                    app:srcCompat="@drawable/ic_likes_outline" />
+            </LinearLayout>
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

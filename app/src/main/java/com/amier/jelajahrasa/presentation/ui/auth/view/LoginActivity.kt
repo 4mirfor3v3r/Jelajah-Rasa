@@ -2,22 +2,16 @@ package com.amier.jelajahrasa.presentation.ui.auth.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.amier.jelajahrasa.R
-import com.amier.jelajahrasa.data.api.ApiHelper
-import com.amier.jelajahrasa.data.api.ApiServiceImpl
 import com.amier.jelajahrasa.databinding.ActivityLoginBinding
-import com.amier.jelajahrasa.external.logDebug
-import com.amier.jelajahrasa.external.showToast
+import com.amier.jelajahrasa.external.extensions.logDebug
+import com.amier.jelajahrasa.external.extensions.showToast
 import com.amier.jelajahrasa.presentation.base.BaseActivity
-import com.amier.jelajahrasa.presentation.base.ViewModelFactory
-import com.amier.jelajahrasa.presentation.main.view.MainActivity
+import com.amier.jelajahrasa.presentation.ui.main.view.MainActivity
 import com.amier.jelajahrasa.presentation.ui.auth.viewmodel.LoginViewModel
-import com.amier.jelajahrasa.utils.Status
 import javax.inject.Inject
 
 class LoginActivity : BaseActivity<LoginViewModel,ActivityLoginBinding>() {
